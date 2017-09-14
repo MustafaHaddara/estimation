@@ -12,7 +12,7 @@ deck = [ (i,j) for j in suits for i in ranks]
 
 class Game:
     def __init__(self):
-        self.players = [Human('player-%d' % (i+1)) for i in range(4)]# + [NPC('cpu-%d' % i) for i in range(3)]
+        self.players = [Human('player-%d' % (i+1)) for i in range(1)] + [NPC('cpu-%d' % i) for i in range(3)]
         self.starting = 0
         self.names = [p.name for p in self.players]
         self.estimates = [0,0,0,0]
@@ -21,7 +21,7 @@ class Game:
 
 
     def playGame(self):
-        cards = 3
+        cards = 10
         while (cards <= 13):
             self.playHand(numCards=cards)
             cards += 1
@@ -132,9 +132,9 @@ class Game:
                 highest = turn
                 continue
 
-        print('\033c')
-        for card in turns:
-            print('%s played: %s of %s' % card)
+        # print('\033c')
+        # for card in turns:
+        #     print('%s played: %s of %s' % card)
         print('%s won with the %s of %s' % highest)
 
         winning_player = self.names.index(highest[0])
