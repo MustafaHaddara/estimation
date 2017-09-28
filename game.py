@@ -3,12 +3,13 @@
 
 from random import randint
 
-from player import NPC, Human
+from NPC import NPC
+from human import Human
 
 suits = ['HEARTS', 'DIAMONDS', 'SPADES', 'CLUBS']
 ranks = ['ACE', 'KING', 'QUEEN', 'JACK', '10', '9', '8', '7', '6', '5', '4', '3', '2']
 
-deck = [ (i,j) for j in suits for i in ranks]
+deck = [ (i,j) for j in suits for i in ranks ]
 
 class Game:
     def __init__(self):

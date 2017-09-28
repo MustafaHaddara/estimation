@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/opt/local/bin/python3
 # Main
 
 from game import Game
