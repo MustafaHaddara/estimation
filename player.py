@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/opt/local/bin/python3
 # Player
 
 import math
@@ -62,7 +62,7 @@ class NPC:
         pass
 
     def findCardToPlay(self, toSearch):
-        if self.estimate < self.won:
+        if self.won < self.estimate:
             return self.findHighest(toSearch)
         else:
             return self.findLowest(toSearch)
@@ -104,8 +104,8 @@ class Human(NPC):
         self.won = 0
 
     def giveCard(self, card):
-        # print ('You recieved a %s of %s' % card)
         self.cards.append(card)
+        self.cards.sort( key=(lambda card: self.getCardKey( card )) )
 
     def getEstimate(self, trumpSuit, invalidEstimate=-1):
         print('\033c')
@@ -140,7 +140,6 @@ class Human(NPC):
             print('Invalid entry.')
             idx = int(input('Which card would you like to play? Enter a number: '))
 
-        # print('^^^^^^^^^^^^^^^^^^')
         return self.cards.pop(idx-1)
 
     def winRound(self):
@@ -169,7 +168,6 @@ class Human(NPC):
                     else:
                         tupl[0] = '  (valid)'
                 allowed.append(tupl)
-        # allowed.sort(key=(lambda card: self.getCardKey( card[1:3] )))
 
         allowed_idx = []
         i = 0
