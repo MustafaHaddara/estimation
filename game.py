@@ -5,6 +5,7 @@ from random import randint
 
 from NPC import NPC
 from human import Human
+from RESTPlayer import RESTPlayer
 
 suits = ['HEARTS', 'DIAMONDS', 'SPADES', 'CLUBS']
 ranks = ['ACE', 'KING', 'QUEEN', 'JACK', '10', '9', '8', '7', '6', '5', '4', '3', '2']
@@ -13,7 +14,8 @@ deck = [ (i,j) for j in suits for i in ranks ]
 
 class Game:
     def __init__(self):
-        self.players = [Human('player-%d' % (i+1)) for i in range(1)] + [NPC('cpu-%d' % i) for i in range(3)]
+        # self.players = [Human('player-%d' % (i+1)) for i in range(1)] + [NPC('cpu-%d' % i) for i in range(3)]
+        self.players = [RESTPlayer('http://127.0.0.1:8000')] + [NPC('cpu-%d' % i) for i in range(3)]
         self.starting = 0
         self.names = [p.name for p in self.players]
         self.estimates = [0,0,0,0]
@@ -32,7 +34,7 @@ class Game:
 
 
     def playHand(self, numCards):
-        input('Press Enter to continue')
+        # input('Press Enter to continue')
         trumpSuit = suits[randint(0,3)]
         self.deal(numCards)
         self.getEstimates(numCards, trumpSuit)
@@ -89,7 +91,7 @@ class Game:
 
     def playRound(self, trumpSuit):
         print('First player is %s' % self.players[self.starting].name)
-        input('Press Enter to continue')
+        # input('Press Enter to continue')
         turns = []
         for i in range(4):
             curr_player = self.players[(self.starting + i) % 4]
@@ -141,7 +143,7 @@ class Game:
         winning_player = self.names.index(highest[0])
         # print(winning_player)
         self.won[winning_player] += 1
-        self.players[winning_player].winRound()
+        self.players[winning_player].roundWon()
         self.starting = winning_player
 
 

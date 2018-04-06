@@ -30,7 +30,7 @@ class Player:
         # must return a tuple of [ <card rank>, <card suit> ]
         pass
 
-    def winRound(self):
+    def roundWon(self):
         # notify the player that they won a round 
         # and that the next round is about to begin
         # no return value

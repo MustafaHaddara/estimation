@@ -54,7 +54,7 @@ class NPC(Player):
         self.cards.remove(playedCard)
         return playedCard
 
-    def winRound(self):
+    def roundWon(self):
         self.won += 1
 
     def printCards(self, firstSuit=None, playing=True):

@@ -35,7 +35,7 @@ class Human(Player):
         self.cards.sort(key=self.getCardKey)
         print('Your turn.')
         for card in turnsPlayed:
-            print('%s played: %s of %s' % card)
+            print('%s played: %s of %s' % tuple(card))
         allowed = self.printCards(turnsPlayed[0][2] if turnsPlayed else None)
         print('Trump suit is:', trumpSuit)
         print('You estimated %d and have already won %d' % (self.estimate, self.won) )
@@ -46,7 +46,7 @@ class Human(Player):
 
         return self.cards.pop(idx-1)
 
-    def winRound(self):
+    def roundWon(self):
         self.won += 1
 
     def printCards(self, firstSuit=None, playing=True):
